@@ -1,20 +1,28 @@
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/layout/Navbar';
-import Landing from './components/layout/Landing';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
-import Alert from './components/layout/Alert';
-import { loadUser } from './actions/auth';
-import setAuthToken from './utils/setAuthToken';
 
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
 
+//actions & utils
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
+
+//Components
+import Alert from './components/layout/Alert';
+import CreateProfile from './components/profiles-form/CreateProfile';
+import Dashboard from './components/dashboard/Dashboard';
+import Landing from './components/layout/Landing';
+import Login from './components/auth/Login';
+import Navbar from './components/layout/Navbar';
+import PrivateRoute from './components/routing/PrivateRoute'; //Private Route untuk redirect quest
+import Register from './components/auth/Register';
+
+//set header x-auth-token jika login
 if (localStorage.token) {
-	setAuthToken(localStorage.item);
+	setAuthToken(localStorage.token);
 }
 
 const App = () => {
@@ -33,6 +41,12 @@ const App = () => {
 						<Switch>
 							<Route exact path="/register" component={Register} />
 							<Route exact path="/login" component={Login} />
+							<PrivateRoute exact path="/dashboard" component={Dashboard} />
+							<PrivateRoute
+								exact
+								path="/create-profile"
+								component={CreateProfile}
+							/>
 						</Switch>
 					</section>
 				</Fragment>

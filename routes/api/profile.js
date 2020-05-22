@@ -14,7 +14,10 @@ const Profile = require('../../models/Profile');
 // @access  Private
 router.get('/me', auth, async (req, res) => {
 	try {
-		const profile = await Profile.findOne({ user: req.user.id }).populate('user', [ 'name', 'avatar' ]); //get profile berdasarkan user login dan join user model
+		const profile = await Profile.findOne({ user: req.user.id }).populate('user', [
+			'name',
+			'avatar'
+		]); //get profile berdasarkan user login dan join user model
 		if (!profile) {
 			return res.status(400).json({
 				msg: 'There is no profile for this user'
@@ -34,13 +37,16 @@ router.post(
 	'/',
 	[
 		auth,
-		[ check('status', 'Status is required').not().isEmpty(), check('skills', 'Skills is required').not().isEmpty() ]
+		[
+			check('status', 'Status is required').not().isEmpty(),
+			check('skills', 'Skills is required').not().isEmpty()
+		]
 	],
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(400).json({
-				erros: errors.array()
+				errors: errors.array()
 			});
 		}
 
@@ -85,7 +91,11 @@ router.post(
 			let profile = await Profile.findOne({ user: req.user.id });
 			if (profile) {
 				//Update
-				profile = await Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true });
+				profile = await Profile.findOneAndUpdate(
+					{ user: req.user.id },
+					{ $set: profileFields },
+					{ new: true }
+				);
 				return res.json(profile);
 			}
 
@@ -119,7 +129,9 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/user/:user_id', async (req, res) => {
 	try {
-		const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', [ 'name', 'avatar' ]);
+		const profile = await Profile.findOne({
+			user: req.params.user_id
+		}).populate('user', [ 'name', 'avatar' ]);
 		if (!profile) return res.status(400).json({ msg: 'Profile Not Found' });
 
 		res.json(profile);
@@ -209,7 +221,9 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
 		const profile = await Profile.findOne({ user: req.user.id });
 
 		//get remove index
-		const removeIndex = profile.experience.map((item) => item.id).indexOf(req.params.exp_id);
+		const removeIndex = profile.experience
+			.map((item) => item.id)
+			.indexOf(req.params.exp_id);
 		profile.experience.splice(removeIndex, 1);
 
 		await profile.save();
@@ -278,7 +292,9 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 		const profile = await Profile.findOne({ user: req.user.id });
 
 		//get remove index
-		const removeIndex = profile.education.map((item) => item.id).indexOf(req.params.edu_id);
+		const removeIndex = profile.education
+			.map((item) => item.id)
+			.indexOf(req.params.edu_id);
 		profile.education.splice(removeIndex, 1);
 
 		await profile.save();
