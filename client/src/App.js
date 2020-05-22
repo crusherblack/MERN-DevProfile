@@ -14,6 +14,7 @@ import setAuthToken from './utils/setAuthToken';
 import Alert from './components/layout/Alert';
 import CreateProfile from './components/profiles-form/CreateProfile';
 import Dashboard from './components/dashboard/Dashboard';
+import EditProfile from './components/profiles-form/EditProfile';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Navbar from './components/layout/Navbar';
@@ -46,6 +47,11 @@ const App = () => {
 								exact
 								path="/create-profile"
 								component={CreateProfile}
+							/>
+							<PrivateRoute
+								exact
+								path="/edit-profile"
+								component={EditProfile}
 							/>
 						</Switch>
 					</section>

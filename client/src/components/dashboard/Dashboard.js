@@ -6,6 +6,8 @@ import { getCurrentProfile } from '../../actions/profile';
 
 import Spinner from '../layout/Spinner';
 
+import DashboardActions from './DashboardActions';
+
 const Dashboard = ({
 	getCurrentProfile,
 	auth: { user },
@@ -24,7 +26,9 @@ const Dashboard = ({
 			</p>
 			{/* Cek jika user punya profile */}
 			{profile !== null ? (
-				<Fragment>has</Fragment>
+				<Fragment>
+					<DashboardActions />
+				</Fragment>
 			) : (
 				<Fragment>
 					<p>You Have not yet set up profile, please add some info</p>
