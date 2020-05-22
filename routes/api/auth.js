@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs'); //import bcrypt
 const User = require('../../models/User');
 
 // @route   GET api/auth
-// @desc    Test Route
+// @desc    Get Data
 // @access  Private
 router.get('/', auth, async (req, res) => {
 	try {
