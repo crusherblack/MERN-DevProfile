@@ -24,6 +24,7 @@ import PrivateRoute from './components/routing/PrivateRoute'; //Private Route un
 import Register from './components/auth/Register';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
 
 //set header x-auth-token jika login
 if (localStorage.token) {
@@ -69,6 +70,7 @@ const App = () => {
 								path="/add-education"
 								component={AddEducation}
 							/>
+							<PrivateRoute exact path="/posts" component={Posts} />
 						</Switch>
 					</section>
 				</Fragment>
