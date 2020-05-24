@@ -1,0 +1,6 @@
+{
+	"mongoURI": "mongodb+srv://crusherblack:kelas2tkj@tahucoding-yxvfw.mongodb.net/test?retryWrites=true&w=majority",
+	"jwtSecret": "mysecrettoken",
+	"githubClientId": "6df21bd64d9d2738bce5",
+	"githubSecret": "8c41b1f5a35e2284303397aff94adec61df29db8"
+}
